@@ -62,6 +62,20 @@ layout, exercise data — is inlined in the file.
 If you want it fully offline, remove the two `<link>` tags in `<head>` and the
 font stacks will fall through to system defaults.
 
+## Icon
+
+An orange dumbbell on a dark rounded square, using the app's existing accent
+color `#FF6A38`.
+
+- `icon.svg` — the source shape.
+- Browser favicon — the same SVG, inlined into `<head>` as a base64 data URI,
+  so `index.html` keeps working standalone with no icon file beside it.
+- `apple-touch-icon.png` — 180x180. iOS ignores SVG and data URIs for home
+  screen icons, so this file has to exist and sit at the site root.
+
+To add it to a phone home screen: open the Pages URL, then Share → Add to Home
+Screen. It'll show the dumbbell and open without browser chrome.
+
 ## Editing
 
 Everything is in `index.html`:
