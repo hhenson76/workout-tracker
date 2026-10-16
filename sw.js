@@ -1,14 +1,14 @@
 /* Workout Tracker service worker — offline-first app shell.
    Bump CACHE when you change any file in SHELL, or phones keep serving the old copy. */
-var CACHE = "workout-tracker-v3";
+var CACHE = "workout-tracker-v4";
 var SHELL = [
   "./",
   "./index.html",
-  "./assets/app.css",
-  "./assets/app.js",
-  "./assets/icon.svg",
-  "./assets/icon-192.png",
-  "./assets/icon-512.png",
+  "./app.css",
+  "./app.js",
+  "./icon.svg",
+  "./icon-192.png",
+  "./icon-512.png",
   "./manifest.webmanifest"
 ];
 

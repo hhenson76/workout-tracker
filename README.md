@@ -18,13 +18,15 @@ No build step, no dependencies, no account. Static files you can drop on GitHub 
 
 ## Files
 
+Everything sits at the repo root — no subfolders, so the GitHub web uploader can't scramble the structure.
+
 ```
 index.html               markup and page head
-assets/app.css           all styling, light and dark themes
-assets/app.js            plan data, exercise library, state, rendering
-assets/icon.svg          source icon
-assets/icon-192.png      home-screen icon
-assets/icon-512.png      splash / maskable icon
+app.css                  all styling, light and dark themes
+app.js                   plan data, exercise library, state, rendering
+icon.svg                 source icon
+icon-192.png             home-screen icon
+icon-512.png             splash / maskable icon
 manifest.webmanifest     makes it installable
 sw.js                    offline cache
 .nojekyll                tells GitHub Pages to serve the files as-is
@@ -34,7 +36,7 @@ LICENSE                  MIT
 ## Putting it on GitHub Pages
 
 1. Create a repository. Public is simplest; Pages on a private repo needs a paid plan.
-2. Upload every file above — the *contents* of this folder, not the folder itself, so `index.html` lands at the repo root. Keep `assets/` as a folder. On github.com: **Add file → Upload files**, then drag them in.
+2. Upload every file above so they all sit at the repo root. On github.com: **Add file → Upload files**, then drag them in. There are no subfolders to preserve.
 3. **Settings → Pages**. Under *Build and deployment*, set **Source** to `Deploy from a branch`, branch `main`, folder `/ (root)`. Save.
 4. Wait a minute or two, then open `https://<your-username>.github.io/<repo-name>/`.
 5. On your phone, open that URL and add it to your home screen — **Share → Add to Home Screen** on iOS, **⋮ → Add to Home screen** on Android.
@@ -59,7 +61,7 @@ Your phone and your laptop keep separate logs, and clearing site data wipes it. 
 
 ## Changing the plan
 
-Everything lives in `assets/app.js`:
+Everything lives in `app.js`:
 
 - `EQUIP` / `DEFAULT_EQ` — the equipment list and which switches start on.
 - `SIDE_DELT`, `REAR_DELT`, `HAM_CURL`, `CALF`, `TRI_MAIN`, `TRI_LONG`, `BICEP`, `BRACH`, `ABS` — pools shared across days.
