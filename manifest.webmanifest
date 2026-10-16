@@ -1,0 +1,17 @@
+{
+  "name": "Workout Tracker",
+  "short_name": "Workout",
+  "description": "A five-day training log with weight fields, exercise swaps, equipment filtering and a dumbbell/kettlebell toggle.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#EDEEF0",
+  "theme_color": "#E2450F",
+  "icons": [
+    { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
