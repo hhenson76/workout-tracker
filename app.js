@@ -11,15 +11,19 @@
     { id:"smith",      name:"Smith machine",        note:"Guided squats, presses, split squats" },
     { id:"bands",      name:"Resistance bands",     note:"Light pulling and isolation work" },
     { id:"bench",      name:"Adjustable bench",     note:"Needed for incline, supported and hip-thrust work" },
+    { id:"decline",    name:"Decline bench",        note:"Decline pressing and decline sit-ups" },
+    { id:"dipbar",     name:"Dip bars",             note:"Chest dips and triceps dips" },
     { id:"bar",        name:"Pull-up bar",          note:"Pull-ups, chin-ups, hanging knee raises" }
   ];
   var DEFAULT_EQ = {
     barbell:true, dumbbell:true, kettlebell:true, cable:true,
-    machine:false, smith:false, bands:false, bench:true, bar:true
+    machine:false, smith:false, bands:false, bench:true, bar:true,
+    decline:true, dipbar:true
   };
   var EQ_LABEL = {
     barbell:"Barbell", dumbbell:"Dumbbell", kettlebell:"Kettlebell", cable:"Cable",
-    machine:"Machine", smith:"Smith", bands:"Band", bench:"Bench", bar:"Bar", body:"Bodyweight"
+    machine:"Machine", smith:"Smith", bands:"Band", bench:"Bench", bar:"Bar",
+    decline:"Decline", dipbar:"Dip bars", body:"Bodyweight"
   };
 
   /* ============ shared option pools ============ */
@@ -78,6 +82,7 @@
     o("kb-kickback","Kettlebell Triceps Kickback", ["kettlebell"], { perLeg:true }),
     o("kb-crushpu", "Crush-Grip Push-Up", ["kettlebell"], { bw:true, lo:10, hi:20 }),
     o("kb-closepu", "Close-Grip Kettlebell Push-Up", ["kettlebell"], { bw:true, lo:10, hi:20 }),
+    o("dip-tri",    "Triceps Dip (upright torso)", ["dipbar"], { bw:true, lo:8, hi:15 }),
     o("cbl-rope",   "Rope Triceps Pushdown", ["cable"]),
     o("cbl-bar",    "Straight-Bar Pushdown", ["cable"]),
     o("db-skull",   "Dumbbell Skull Crusher", ["dumbbell","bench"]),
@@ -123,7 +128,10 @@
     o("kb-situp",   "Kettlebell Overhead Sit-Up", ["kettlebell"], { lo:10, hi:15 }),
     o("kb-deadbug", "Kettlebell Dead Bug Pullover", ["kettlebell"], { lo:10, hi:15 }),
     o("kb-windmill","Kettlebell Windmill", ["kettlebell"], { perLeg:true }),
+    o("kb-declcrunch","Decline Kettlebell Crunch", ["kettlebell","decline"]),
     o("db-crunch",  "Weighted Dumbbell Crunch", ["dumbbell"]),
+    o("db-declsitup","Weighted Decline Sit-Up", ["dumbbell","decline"], { lo:10, hi:15 }),
+    o("bw-declsitup","Decline Sit-Up", ["decline"], { bw:true, lo:12, hi:20 }),
     o("db-twist",   "Dumbbell Russian Twist", ["dumbbell"], { lo:12, hi:20 }),
     o("cbl-crunch", "Cable Crunch", ["cable"]),
     o("mch-crunch", "Machine Crunch", ["machine"]),
@@ -137,7 +145,7 @@
     { id:"push", num:"01", name:"Push", day:"Monday", muscles:"Chest &middot; Shoulders &middot; Triceps",
       coach:"Open the week with the biggest press you can do with clean technique. Everything after it is support work.",
       slots:[
-        { id:"p1", role:"Primary chest press", sets:3, lo:6, hi:10, opts:[
+        { id:"p1", role:"Flat press", sets:3, lo:6, hi:10, opts:[
           o("kb-floor",  "Kettlebell Floor Press", ["kettlebell"]),
           o("kb-dblfloor","Double Kettlebell Floor Press", ["kettlebell"]),
           o("kb-bench",  "Kettlebell Bench Press", ["kettlebell","bench"]),
@@ -148,7 +156,7 @@
           o("sm-bench",  "Smith Machine Bench Press", ["smith","bench"]),
           o("bw-pushup", "Weighted Push-Up", [], { lo:10, hi:20 })
         ]},
-        { id:"p2", role:"Upper chest", sets:3, lo:8, hi:12, opts:[
+        { id:"p2", role:"Incline press", sets:3, lo:8, hi:12, opts:[
           o("kb-incpress","Incline Kettlebell Press", ["kettlebell","bench"]),
           o("kb-incsq",  "Incline Kettlebell Squeeze Press", ["kettlebell","bench"]),
           o("kb-deficit","Deficit Push-Up on Kettlebells", ["kettlebell"], { bw:true, lo:10, hi:20 }),
@@ -174,14 +182,22 @@
           o("sm-ohp",    "Smith Machine Shoulder Press", ["smith"])
         ]},
         { id:"p4", role:"Side delts", sets:3, lo:12, hi:15, opts:SIDE_DELT },
-        { id:"p5", role:"Chest isolation", sets:2, lo:10, hi:15, opts:[
+        { id:"p5", role:"Decline / lower chest", sets:2, lo:10, hi:15, opts:[
+          o("kb-declpress","Decline Kettlebell Press", ["kettlebell","decline"]),
+          o("kb-declfly","Decline Kettlebell Fly", ["kettlebell","decline"]),
           o("kb-sqpress","Kettlebell Squeeze Press", ["kettlebell"]),
           o("kb-fly",    "Kettlebell Fly", ["kettlebell","bench"]),
           o("kb-crushpu2","Crush-Grip Push-Up", ["kettlebell"], { bw:true, lo:10, hi:20 }),
-          o("mch-pec",   "Pec Deck", ["machine"]),
-          o("cbl-fly",   "Cable Fly", ["cable"]),
+          o("db-declpress","Decline Dumbbell Press", ["dumbbell","decline"]),
+          o("db-declfly","Decline Dumbbell Fly", ["dumbbell","decline"]),
           o("db-fly",    "Dumbbell Fly", ["dumbbell","bench"]),
+          o("bb-decline","Decline Barbell Press", ["barbell","decline"]),
+          o("dip-chest", "Chest Dip (forward lean)", ["dipbar"], { bw:true, lo:8, hi:15 }),
+          o("cbl-highlow","High-to-Low Cable Fly", ["cable"]),
+          o("cbl-fly",   "Cable Fly", ["cable"]),
+          o("mch-pec",   "Pec Deck", ["machine"]),
           o("bnd-fly",   "Band Chest Fly", ["bands"]),
+          o("bw-handselev","Hands-Elevated Push-Up", [], { bw:true, lo:12, hi:20 }),
           o("bw-deficit","Deficit Push-Up", [], { bw:true, lo:10, hi:20 })
         ]},
         { id:"p6", role:"Triceps", sets:3, lo:10, hi:15, opts:TRI_MAIN },
@@ -192,18 +208,25 @@
       coach:"Chest-supported rows on purpose &mdash; all the back stimulus, none of the lower-back tax while you're getting conditioned again.",
       slots:[
         { id:"u1", role:"Vertical pull", sets:3, lo:8, hi:12, opts:[
-          o("kb-pullover","Kettlebell Pullover", ["kettlebell","bench"]),
-          o("kb-floorpull","Floor Kettlebell Pullover", ["kettlebell"]),
-          o("kb-tkpull", "Tall-Kneeling Kettlebell Pullover", ["kettlebell"]),
-          o("cbl-pulldown","Lat Pulldown", ["cable"]),
+          o("cbl-pulldown","Wide-Grip Lat Pulldown", ["cable"]),
+          o("cbl-closepull","Close-Grip Lat Pulldown", ["cable"]),
+          o("cbl-ngpull3","Neutral-Grip Lat Pulldown", ["cable"]),
+          o("cbl-1armpull","Single-Arm Cable Pulldown", ["cable"], { perLeg:true }),
+          o("cbl-kneelpull","Half-Kneeling Cable Pulldown", ["cable"], { perLeg:true }),
           o("bar-pullup","Pull-Up or Assisted Pull-Up", ["bar"], { bw:true, lo:5, hi:10 }),
-          o("db-pullover","Single-Arm Dumbbell Pullover", ["dumbbell","bench"]),
+          o("bar-widepull","Wide-Grip Pull-Up", ["bar"], { bw:true, lo:5, hi:10 }),
+          o("kb-pullover","Cross-Bench Kettlebell Pullover", ["kettlebell","bench"], { noPref:true }),
+          o("kb-floorpull","Floor Kettlebell Pullover", ["kettlebell"], { noPref:true }),
+          o("kb-tkpull", "Tall-Kneeling Kettlebell Pullover", ["kettlebell"], { noPref:true }),
+          o("db-pullover","Single-Arm Dumbbell Pullover", ["dumbbell","bench"], { noPref:true }),
           o("bnd-pulldown","Band Lat Pulldown", ["bands"])
         ]},
         { id:"u2", role:"Supported row", sets:3, lo:8, hi:12, opts:[
+          o("kb-inclrow","Incline Chest-Supported Kettlebell Row", ["kettlebell","bench"]),
           o("kb-csrow",  "Chest-Supported Kettlebell Row", ["kettlebell","bench"]),
           o("kb-renegade","Kettlebell Renegade Row", ["kettlebell"], { perLeg:true }),
           o("kb-elevrow","Elevated Plank Kettlebell Row", ["kettlebell","bench"], { perLeg:true }),
+          o("db-inclrow","Incline Chest-Supported Dumbbell Row", ["dumbbell","bench"]),
           o("db-csrow",  "Chest-Supported Dumbbell Row", ["dumbbell","bench"]),
           o("mch-csrow", "Chest-Supported Machine Row", ["machine"]),
           o("bb-seal",   "Seal Row", ["barbell","bench"]),
@@ -215,10 +238,24 @@
           o("kb-wrestler","Kettlebell Wrestler's Row", ["kettlebell"]),
           o("kb-archer", "Kettlebell Archer Row", ["kettlebell"], { perLeg:true }),
           o("kb-suitrow","Kettlebell Suitcase Row", ["kettlebell"], { perLeg:true }),
+          o("kb-deadstop","Dead-Stop Kettlebell Row", ["kettlebell"], { perLeg:true }),
+          o("kb-kroc",   "Kroc Row (high-rep heavy single-arm)", ["kettlebell"], { perLeg:true, lo:12, hi:20 }),
+          o("cbl-widerow","Wide-Grip Seated Cable Row", ["cable"]),
           o("cbl-row",   "Seated Cable Row", ["cable"]),
           o("db-1arm",   "Single-Arm Dumbbell Row", ["dumbbell","bench"], { perLeg:true }),
           o("bb-row",    "Bent-Over Barbell Row", ["barbell"]),
           o("bnd-row",   "Band Seated Row", ["bands"])
+        ]},
+        { id:"u3b", role:"Lat isolation", sets:2, lo:12, hi:15, opts:[
+          o("kb-xpullover","Cross-Bench Kettlebell Pullover", ["kettlebell","bench"]),
+          o("kb-floorpull3","Floor Kettlebell Pullover", ["kettlebell"]),
+          o("kb-tkpull4","Tall-Kneeling Kettlebell Pullover", ["kettlebell"]),
+          o("db-xpullover","Cross-Bench Dumbbell Pullover", ["dumbbell","bench"]),
+          o("cbl-straight","Straight-Arm Cable Pulldown", ["cable"]),
+          o("cbl-ropepull","Kneeling Rope Lat Pullover", ["cable"]),
+          o("cbl-1armstraight","Single-Arm Straight-Arm Pulldown", ["cable"], { perLeg:true }),
+          o("bnd-straight","Band Straight-Arm Pulldown", ["bands"]),
+          o("bar-hang",  "Dead Hang", ["bar"], { bw:true, time:true, lo:20, hi:45 })
         ]},
         { id:"u4", role:"Rear delts", sets:3, lo:12, hi:15, opts:REAR_DELT },
         { id:"u5", role:"Biceps", sets:3, lo:8, hi:12, opts:BICEP },
@@ -309,21 +346,26 @@
           o("sm-incline2","Incline Smith Press", ["smith","bench"])
         ]},
         { id:"v2", role:"Neutral-grip pull", sets:3, lo:8, hi:12, opts:[
-          o("kb-pullover2","Kettlebell Pullover", ["kettlebell","bench"]),
-          o("kb-tkpull2","Tall-Kneeling Kettlebell Pullover", ["kettlebell"]),
-          o("kb-dbhighpull","Two-Handed Kettlebell High Pull", ["kettlebell"], { lo:10, hi:15 }),
           o("cbl-ngpull","Neutral-Grip Lat Pulldown", ["cable"]),
+          o("cbl-straight2","Straight-Arm Cable Pulldown", ["cable"]),
+          o("cbl-1armpull2","Single-Arm Cable Pulldown", ["cable"], { perLeg:true }),
           o("bar-ngpull","Neutral-Grip Pull-Up", ["bar"], { bw:true, lo:5, hi:10 }),
-          o("db-pullover2","Dumbbell Pullover", ["dumbbell","bench"]),
+          o("bar-chinup2","Chin-Up", ["bar"], { bw:true, lo:5, hi:10 }),
+          o("kb-dbhighpull","Two-Handed Kettlebell High Pull", ["kettlebell"], { lo:10, hi:15, noPref:true }),
+          o("kb-pullover2","Kettlebell Pullover", ["kettlebell","bench"], { noPref:true }),
+          o("kb-tkpull2","Tall-Kneeling Kettlebell Pullover", ["kettlebell"], { noPref:true }),
+          o("db-pullover2","Dumbbell Pullover", ["dumbbell","bench"], { noPref:true }),
           o("bnd-ngpull","Band Neutral-Grip Pulldown", ["bands"])
         ]},
         { id:"v3", role:"Row", sets:3, lo:8, hi:12, opts:[
+          o("kb-inclrow2","Incline Chest-Supported Kettlebell Row", ["kettlebell","bench"]),
           o("kb-bor",    "Bent-Over Kettlebell Row", ["kettlebell"]),
           o("kb-gorilla2","Kettlebell Gorilla Row", ["kettlebell"], { perLeg:true }),
           o("kb-renegade2","Kettlebell Renegade Row", ["kettlebell"], { perLeg:true }),
           o("kb-wrestler2","Kettlebell Wrestler's Row", ["kettlebell"]),
           o("mch-row2",  "Machine Row", ["machine"]),
           o("cbl-row2",  "Cable Row", ["cable"]),
+          o("db-inclrow2","Incline Chest-Supported Dumbbell Row", ["dumbbell","bench"]),
           o("db-bor",    "Bent-Over Dumbbell Row", ["dumbbell"]),
           o("bb-row2",   "Bent-Over Barbell Row", ["barbell"])
         ]},
@@ -331,6 +373,8 @@
           o("kb-sqpress2","Kettlebell Squeeze Press", ["kettlebell"]),
           o("kb-floor2", "Kettlebell Floor Press", ["kettlebell"]),
           o("kb-crushpu3","Crush-Grip Push-Up", ["kettlebell"], { bw:true, lo:12, hi:20 }),
+          o("dip-chest2","Chest Dip (forward lean)", ["dipbar"], { bw:true, lo:8, hi:15 }),
+          o("db-declpress2","Decline Dumbbell Press", ["dumbbell","decline"]),
           o("mch-press2","Machine Chest Press", ["machine"]),
           o("db-bench2", "Flat Dumbbell Press", ["dumbbell","bench"]),
           o("cbl-press", "Standing Cable Press", ["cable"]),
@@ -468,7 +512,9 @@
   }
   /* "whenever possible": options loaded with the preferred tool come first, and
      list order decides the fallback when a slot has no option for that tool. */
-  function isPref(opt){ return opt.eq.indexOf(state.pref) > -1; }
+  /* noPref: available and swappable, but never wins the slot on tool preference
+     alone — stops a pullover hijacking a pulldown slot just because it's a KB. */
+  function isPref(opt){ return !opt.noPref && opt.eq.indexOf(state.pref) > -1; }
   function preferredOpts(list){
     var hit = [];
     for(var i = 0; i < list.length; i++){ if(isPref(list[i])) hit.push(list[i]); }

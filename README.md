@@ -9,10 +9,12 @@ No build step, no dependencies, no account. Static files you can drop on GitHub 
 - **Five sessions a week**, structured so each muscle group gets trained roughly twice: Mon Push, Tue Pull, Wed Legs, Thu rest, Fri Upper, Sat Lower, Sun rest.
 - **Log every set** — weight and reps (or seconds, for holds and carries), plus a done toggle. Saves as you type.
 - **Week-by-week history.** Each week is stored separately and the previous week's numbers appear under every set row, which is what double progression needs.
-- **Dumbbell / kettlebell toggle.** A switch above each session sets which tool the picker reaches for first. On Kettlebell, all 37 slots fill with kettlebell movements; slots with no kettlebell version keep the best thing your gym has.
-- **Equipment filtering.** Switch off the machines your gym doesn't have and every exercise needing them disappears, replaced by one that trains the same muscle with what you do have. 228 exercises, 101 of them kettlebell; the plan still fills completely at bodyweight-only.
+- **Dumbbell / kettlebell toggle.** A switch above each session sets which tool the picker reaches for first. On Kettlebell, every slot with a genuine kettlebell version uses it; slots with no kettlebell version keep the best thing your gym has.
+- **Equipment filtering.** Switch off the machines your gym doesn't have and every exercise needing them disappears, replaced by one that trains the same muscle with what you do have. 256 exercises, 108 of them kettlebell; the plan still fills completely at bodyweight-only.
 - **Exercise swaps.** Each card is a *slot* — "primary chest press", "hamstring curl" — not a fixed lift. Re-roll one card or shuffle the whole day. Optional auto-vary rolls a fresh selection each new week.
 - **No repeats within a session.** Pools are shared between slots, so the picker tracks what a day has already used and won't serve you two floor presses or two sets of swings in one workout.
+- **Bench angles split across slots.** Push day runs flat, then incline, then decline-or-dips — one angle per slot, so each is trained fresh rather than three bench variations stacked together.
+- **A dedicated lat-isolation slot.** Straight-arm pulldowns and pullovers train shoulder extension with the elbows locked, so the lats finish the set instead of the biceps. Pull day is 8 exercises.
 - **Coaching built in.** Reps-in-reserve targets shift by week (3–4 RIR in weeks 1–2, down to 1–2 by week 5), with rest periods and the progression scheme in the Guide sheet.
 - **Installable and offline.** A service worker caches the app shell, so it opens in a dead-signal basement gym and can be added to your home screen.
 
@@ -80,7 +82,8 @@ o("db-lunge",  "Dumbbell Walking Lunge", ["dumbbell"], { perLeg: true })
 Two rules that keep the picker honest:
 
 - Give every slot at least one option with an empty equipment array, and the plan can never strand you with an unfillable card.
-- **Order matters.** Within a slot, the first option available for the current preference is the default pick, so put the movement you'd actually choose first.
+- **Order matters.** Within a slot, the first option available for the current preference is the default pick, so put the movement you'd actually choose first. List order is also the fallback order when no option matches the preferred tool.
+- **`noPref: true`** keeps an option available and swappable but stops it winning the slot on tool preference alone. Use it where an exercise is a legitimate choice but the wrong movement to default to — a kettlebell pullover sitting in a lat-pulldown slot, for instance.
 
 After editing any file, bump `CACHE` in `sw.js` — otherwise phones that already installed it keep serving the old version from cache.
 

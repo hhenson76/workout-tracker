@@ -1,10 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Workout Tracker">
   <rect width="512" height="512" rx="112" fill="#E2450F"/>
-  <g fill="#FFF4EF">
-    <rect x="112" y="240" width="288" height="32" rx="12"/>
-    <rect x="92"  y="172" width="46"  height="168" rx="18"/>
-    <rect x="374" y="172" width="46"  height="168" rx="18"/>
-    <rect x="148" y="204" width="34"  height="104" rx="14"/>
-    <rect x="330" y="204" width="34"  height="104" rx="14"/>
+  <g transform="translate(0,-8)">
+    <path d="M176 302 L176 174 Q176 132 218 132 L294 132 Q336 132 336 174 L336 302"
+          fill="none" stroke="#FFF4EF" stroke-width="38" stroke-linecap="round"/>
+    <path d="M184 439 A119 119 0 1 1 328 439 Z"
+          fill="#FFF4EF" stroke="#FFF4EF" stroke-width="10" stroke-linejoin="round"/>
+    <path d="M168 325 A90 90 0 0 1 228 259"
+          fill="none" stroke="#E2450F" stroke-width="15" stroke-linecap="round"/>
   </g>
 </svg>
